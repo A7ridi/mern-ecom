@@ -10,7 +10,6 @@ process.on("uncaughtException", (err) => {
 
 // config
 dotenv.config();
-console.log(process.env.DB_URI);
 connectDatabase(process.env.DB_URI);
 
 const PORT = process.env.PORT || 8080;
