@@ -18,6 +18,19 @@
 	gap: 10px;
 	text-decoration: none;
 }
+.product-details {
+	display: flex;
+	width: 100%;
+}
+.product-image {
+	flex: 0.5;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+.product-details-block {
+	flex: 0.5;
+}
 .ProductDetails > div {
 	width: 100%;
 	display: flex;
@@ -74,6 +87,7 @@
 .detailsBlock-3-1 {
 	display: flex;
 	align-items: center;
+	/* width: 227px; */
 }
 
 .detailsBlock-3-1-1 > button {
@@ -213,16 +227,19 @@
 		flex-direction: column;
 		height: unset;
 	}
-
 	.ProductDetails > div:last-child {
 		align-items: center;
+		flex-direction: column;
 	}
-
 	.detailsBlock-1 > h2 {
 		font-size: 2.8vmax;
 		text-align: center;
 	}
-
+	.product-details-block {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+	}
 	.detailsBlock-1 > p {
 		text-align: center;
 		font-size: 1vmax;
@@ -230,11 +247,14 @@
 
 	.detailsBlock-2 {
 		justify-content: center;
+		width: 100%;
 	}
 	.detailsBlock-2 > span {
 		font-size: 1.5vmax;
 	}
-
+	.detailsBlock-3 {
+		width: 100%;
+	}
 	.detailsBlock-3 > h1 {
 		font: 700 3vmax "Franklin Gothic Medium";
 		text-align: center;
