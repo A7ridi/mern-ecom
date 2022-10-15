@@ -18,6 +18,8 @@ import {
 	ArcElement,
 } from "chart.js";
 import { getAdminProduct } from "../../redux/actions/productAction";
+import { getAllOrders } from "../../redux/actions/orderAction";
+import { getAllUsers } from "../../redux/actions/userAction";
 
 ChartJS.register(
 	CategoryScale,
@@ -34,6 +36,8 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 
 	const { products } = useSelector((state) => state.product);
+	const { orders } = useSelector((state) => state.allOrders);
+	const { users } = useSelector((state) => state.allUsers);
 
 	let outOfStock = 0;
 
@@ -46,15 +50,16 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(getAdminProduct());
-		// dispatch(getAllOrders());
-		// dispatch(getAllUsers());
+		dispatch(getAllOrders());
+		dispatch(getAllUsers());
 	}, [dispatch]);
 
 	let totalAmount = 0;
-	// orders &&
-	//   orders.forEach((item) => {
-	//     totalAmount += item.totalPrice;
-	//   });
+
+	orders &&
+		orders.forEach((item) => {
+			totalAmount += item.totalPrice;
+		});
 
 	const lineState = {
 		labels: ["Initial Amount", "Amount Earned"],
@@ -99,11 +104,11 @@ const Dashboard = () => {
 						</Link>
 						<Link to="/admin/orders">
 							<p>Orders</p>
-							{/* <p>{orders && orders.length}</p> */}
+							<p>{orders && orders.length}</p>
 						</Link>
 						<Link to="/admin/users">
 							<p>Users</p>
-							{/* <p>{users && users.length}</p> */}
+							<p>{users && users.length}</p>
 						</Link>
 					</div>
 

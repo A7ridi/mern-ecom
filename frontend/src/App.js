@@ -34,6 +34,13 @@ import ProductList from "./component/admin/ProductList";
 import NewProduct from "./component/admin/NewProduct";
 import UpdateProduct from "./component/admin/UpdateProduct";
 import OrderList from "./component/admin/OrderList";
+import ProcessOrder from "./component/admin/ProcessOrder";
+import UsersList from "./component/admin/UsersList";
+import UpdateUser from "./component/admin/UpdateUser";
+import ProductReviews from "./component/admin/ProductReviews";
+import Contact from "./component/layout/Contact";
+import About from "./component/layout/About";
+import NotFound from "./component/layout/NotFound/NotFound";
 
 function App() {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -55,6 +62,8 @@ function App() {
 
 		getStripeApiKey();
 	}, []);
+
+	window.addEventListener("contextmenu", (e) => e.preventDefault());
 	return (
 		<Router>
 			<Header />
@@ -66,6 +75,8 @@ function App() {
 				<Route path="/products/:keyword" element={<Products />} />
 				<Route exact path="/search" element={<Search />} />
 				<Route exact path="/login" element={<LoginSignUp />} />
+				<Route exact path="/contact" element={<Contact />} />
+				<Route exact path="/about" element={<About />} />
 				<Route exact path="/account" element={<ProtectedRoute />}>
 					<Route exact path="/account" element={<Profile />} />
 				</Route>
@@ -139,6 +150,36 @@ function App() {
 				>
 					<Route exact path="/admin/orders" element={<OrderList />} />
 				</Route>
+				<Route
+					exact
+					path="/admin/order/:id"
+					element={<ProtectedRoute isAdmin="true" />}
+				>
+					<Route exact path="/admin/order/:id" element={<ProcessOrder />} />
+				</Route>
+				<Route
+					exact
+					path="/admin/users"
+					element={<ProtectedRoute isAdmin="true" />}
+				>
+					<Route exact path="/admin/users" element={<UsersList />} />
+				</Route>
+				<Route
+					exact
+					path="/admin/user/:id"
+					element={<ProtectedRoute isAdmin="true" />}
+				>
+					<Route exact path="/admin/user/:id" element={<UpdateUser />} />
+				</Route>
+				<Route
+					exact
+					path="/admin/reviews"
+					element={<ProtectedRoute isAdmin="true" />}
+				>
+					<Route exact path="/admin/reviews" element={<ProductReviews />} />
+				</Route>
+
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<Footer />
 		</Router>
