@@ -22,8 +22,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 		email,
 		password,
 		avatar: {
-			public_id: myCloud.public_id,
-			url: myCloud.secure_url,
+			public_id: myCloud.public_id, // 'test@env',
+			url: myCloud.secure_url, // 'https://cdnb.artstation.com/p/marketplace/presentation_assets/000/360/605/large/file.jpg?1588300331'
 		},
 	});
 

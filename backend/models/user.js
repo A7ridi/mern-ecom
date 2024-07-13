@@ -53,11 +53,21 @@ userSchema.pre("save", async function (next) {
 });
 
 // JWT Token
+// userSchema.methods.getJWTToken = function () {
+// 	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+// 		expiresIn: process.env.JWT_EXPIRE,
+// 	});
+// };
+
 userSchema.methods.getJWTToken = function () {
-	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-		expiresIn: process.env.JWT_EXPIRE,
-	});
+    const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: parseInt(process.env.JWT_EXPIRE, 10),
+    });
+    const decoded = jwt.decode(token);
+    console.log('Token will expire at:', new Date(decoded.exp * 1000));
+    return token;
 };
+
 
 // compare password
 userSchema.methods.comparePassword = async function (password) {
